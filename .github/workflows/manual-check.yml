@@ -1,0 +1,25 @@
+name: manual-check-wf
+
+on:
+  push:
+    branches: check-version
+
+jobs:
+  check-minecraft-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          ./update-minecraft-version.sh
+          
+          if git status | grep -q "working tree clean"; then
+            echo "No changes, exiting."
+            exit
+          fi
+
+          git config --global user.email "Ricardo@Feliciano.Tech"
+          git config --global user.name "Ricardo N Feliciano"
+
+          git add ./MINECRAFT_VERSION
+          git commit -m "Adding new Minecraft version."
+          git push
