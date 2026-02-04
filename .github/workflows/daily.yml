@@ -1,0 +1,42 @@
+name: daily-wf
+
+on:
+  schedule:
+    - cron: '30 9 * * *'
+
+jobs:
+  test-on-ubuntu:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-22.04
+          - ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Update the OS before we start. Sometimes avoids OS-level bugs."
+        run: sudo apt-get update && sudo apt-get dist-upgrade
+      - name: "Install Ubuntu Desktop since the launcher needs it."
+        run: sudo apt-get install -y ubuntu-desktop
+      - run: |
+          sudo ./minecraft-mgr.sh install
+          echo "The new executable is located at:"
+          which minecraft-launcher
+  check-minecraft-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          ./update-minecraft-version.sh
+          
+          if git status | grep -q "working tree clean"; then
+            echo "No changes, exiting."
+            exit
+          fi
+
+          git config --global user.email "Ricardo@Feliciano.Tech"
+          git config --global user.name "Ricardo N Feliciano"
+
+          git add ./MINECRAFT_VERSION
+          git commit -m "Adding new Minecraft version."
+          git push
