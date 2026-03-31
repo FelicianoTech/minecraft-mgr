@@ -1,4 +1,4 @@
-# Minecraft Manager (`minecraft-mgr`) [![CircleCI Build Status](https://circleci.com/gh/felicianotech/minecraft-mgr.svg?style=shield)](https://circleci.com/gh/felicianotech/minecraft-mgr) [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/felicianotech/minecraft-mgr/trunk/LICENSE)
+# Minecraft Manager (`minecraft-mgr`) [![GitHub License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/felicianotech/minecraft-mgr/trunk/LICENSE)
 
 `minecraft-mgr` is a script that makes installing and updating Minecraft Java
 Edition on Ubuntu easier.
@@ -9,10 +9,10 @@ Edition on Ubuntu easier.
 This project supports 64-bit desktop installations of Ubuntu.
 Specifically, these releases:
 
-- Ubuntu 18.04 "Bionic" 
 - Ubuntu 20.04 "Focal"
 - Ubuntu 22.04 "Jammy"
-- Ubuntu Lunar
+- Ubuntu 24.04 "Noble"
+- Ubuntu Resolute
 
 For 32-bit support or other distros, please open a Pull Request or Issue.
 
